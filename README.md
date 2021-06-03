@@ -4,11 +4,13 @@
     <img src="https://media.giphy.com/media/EIiJp9cQ3GeEU/giphy.gif" />
 <h1>
 
-<!-- ## OBJECTIVES
+## OBJECTIVES
 
-## DEPENDENCIES
+    The goal of this project is to develop from scracth an application that behaves like [Tweeter](https://twitter.com/). The focus is primarily on the **PERN** stack, which stands for **P**ostgres **E**xpress **R**eact and **N**ode.js.
 
-## REFERENCES -->
+## TECHNOLOGIES & DEPENDENCIES
+
+## REFERENCES
 
 ## LICENSE
 
