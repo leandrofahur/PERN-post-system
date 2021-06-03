@@ -10,6 +10,9 @@ class Post {
   @Column()
   content: string;
 
+  @Column()
+  user_id: string;
+
   @CreateDateColumn()
   createdAt: Date;
 

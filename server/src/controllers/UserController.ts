@@ -31,6 +31,26 @@ class UserController {
       });
     }
   }
+
+  async find(request: Request, response: Response) {
+    try {
+      const usersRepository = getCustomRepository(UsersRepository);
+      const users = await usersRepository.find();
+
+      if (!users) {
+        return response.status(400).json({
+          error: "Table is not populated",
+        });
+      }
+
+      return response.status(201).json(users);
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({
+        error: "Server error!",
+      });
+    }
+  }
 }
 
 export { UserController };

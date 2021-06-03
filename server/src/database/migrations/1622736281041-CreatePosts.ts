@@ -12,6 +12,10 @@ export class CreatePosts1622736281041 implements MigrationInterface {
             isPrimary: true,
           },
           {
+            name: "user_id",
+            type: "uuid",
+          },
+          {
             name: "content",
             type: "varchar",
           },
@@ -19,6 +23,16 @@ export class CreatePosts1622736281041 implements MigrationInterface {
             name: "createdAt",
             type: "timestamp",
             default: "now()",
+          },
+        ],
+        foreignKeys: [
+          {
+            name: "user_id_fk",
+            referencedTableName: "users",
+            referencedColumnNames: ["id"],
+            columnNames: ["user_id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
           },
         ],
       })
