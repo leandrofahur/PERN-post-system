@@ -8,10 +8,10 @@ import {
 } from "typeorm";
 
 import { v4 as uuid } from "uuid";
-import { User } from "./User";
+import { Post } from "./Post";
 
-@Entity("posts")
-class Post {
+@Entity("comments")
+class Comments {
   @PrimaryColumn()
   readonly id: string;
 
@@ -19,11 +19,11 @@ class Post {
   content: string;
 
   @Column()
-  user_id: string;
+  post_id: string;
 
-  @ManyToOne(() => User, { onDelete: "CASCADE", onUpdate: "CASCADE" })
-  @JoinColumn({ name: "user_id" })
-  user: User;
+  @ManyToOne(() => Post, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+  @JoinColumn({ name: "post_id" })
+  post: Post;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -35,4 +35,4 @@ class Post {
   }
 }
 
-export { Post };
+export { Comments };

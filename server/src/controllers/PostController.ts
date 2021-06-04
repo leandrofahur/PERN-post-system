@@ -42,15 +42,7 @@ class PostController {
       const { user_id } = request.params;
       const postsRepository = getCustomRepository(PostsRepository);
 
-      const posts = await postsRepository.find({
-        user_id,
-      });
-
-      // if (!posts) {
-      //   return response.status(400).json({
-      //     error: "The user has no posts to display",
-      //   });
-      // }
+      const posts = await postsRepository.find({ user_id });
 
       return response.status(201).json(posts);
     } catch (error) {
