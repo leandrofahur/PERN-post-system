@@ -11,7 +11,7 @@ import { app } from "../app";
 import createConnection from "../database/index";
 
 describe("Users", () => {
-  let connection;
+  let connection = null;
 
   beforeAll(async () => {
     connection = await createConnection();
@@ -27,12 +27,12 @@ describe("Users", () => {
     expect(response.status).toBe(201);
   });
 
-  // afterAll(async () => {
-  //   const entities = getConnection().entityMetadatas;
+  afterAll(async () => {
+    const entities = connection.entityMetadatas;
 
-  //   entities.map(async (entity) => {
-  //     const repository = getConnection().getRepository(entity.name);
-  //     await repository.clear();
-  //   });
-  // });
+    for (const entity of entities) {
+      const repository = connection.getRepository(entity.name);
+      await repository.delete({});
+    }
+  });
 });
