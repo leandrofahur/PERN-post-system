@@ -5,7 +5,6 @@ import {
 } from "typeorm";
 import request from "supertest";
 import { UsersRepository } from "../repositories/UsersRepository";
-// import { PostsRepository } from "../repositories/PostsRepository";
 import { app } from "../app";
 
 import createConnection from "../database/index";
@@ -23,6 +22,12 @@ describe("Users", () => {
       username: "john doe",
       email: "johndoe@email.com",
     });
+
+    expect(response.status).toBe(201);
+  });
+
+  it("should be able to featch all users", async () => {
+    const response = await request(app).get("/users");
 
     expect(response.status).toBe(201);
   });
