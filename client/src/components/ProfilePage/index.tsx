@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Container,
@@ -11,9 +11,19 @@ import {
   EditButton,
 } from './styles';
 
+import UserService from '../../services/UserService';
 import Feed from '../Feed';
 
 const ProfilePage: React.FC = () => {
+  useEffect(() => {
+    const getUsers = async () => {
+      const response = await UserService.getAll();
+      console.log(response);
+    };
+
+    getUsers();
+  }, []);
+
   return (
     <Container>
       <Banner>
@@ -22,7 +32,7 @@ const ProfilePage: React.FC = () => {
       <ProfileData>
         <EditButton outlined>Edit Profile</EditButton>
         <h1>Leandro</h1>
-        <h2>@leandro</h2>
+        <h2>Leandro</h2>
 
         <p>Developer</p>
         <ul>

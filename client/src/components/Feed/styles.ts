@@ -33,6 +33,13 @@ export const Tweets = styled.div`
   flex-shrink: 0;
 `;
 
+export const Posts = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  flex-shrink: 0;
+`;
+
 export const Tabs = styled.div`
   display: flex;
   justify-content: space-evenly;

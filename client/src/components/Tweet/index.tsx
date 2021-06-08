@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
+import postService from '../../services/PostService';
 import {
   Container,
   Body,
@@ -14,6 +15,17 @@ import {
 import TextArea from '../TextArea';
 
 const Tweet: React.FC = () => {
+  const [content, setContent] = useState('');
+
+  // const registerPost = async () => {
+  //   try {
+  //     const response = await postService.create({ content });
+  //     console.log(response);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //   }
+  // };
+
   return (
     <Container>
       <Body>
@@ -26,7 +38,14 @@ const Tweet: React.FC = () => {
             <time>{Date().substr(0, 15)}</time>
           </Header>
           <TweetForm>
-            <TextArea rows={6} placeholder="What are you thinking?"></TextArea>
+            <TextArea
+              rows={6}
+              placeholder="What are you thinking?"
+              value={content}
+              onChange={(e) => {
+                setContent(e.target.value);
+              }}
+            ></TextArea>
             <PostButton outlined>Post</PostButton>
           </TweetForm>
         </Content>
