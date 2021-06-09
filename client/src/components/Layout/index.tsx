@@ -3,12 +3,17 @@ import React from 'react';
 import Main from '../Main';
 import { Container, Wrapper } from './styles';
 
-const Layout: React.FC = () => {
+interface layoutProps {
+  setAuth: (bool: boolean) => void;
+  username: string;
+}
+
+const Layout: React.FC<layoutProps> = ({ setAuth, username }) => {
   return (
     <Container>
       <Wrapper>
         {/* <MenuBar /> */}
-        <Main />
+        <Main setAuth={setAuth} username={username} />
         {/* <SideBar /> */}
       </Wrapper>
     </Container>

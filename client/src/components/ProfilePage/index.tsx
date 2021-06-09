@@ -14,15 +14,19 @@ import {
 import UserService from '../../services/UserService';
 import Feed from '../Feed';
 
-const ProfilePage: React.FC = () => {
-  useEffect(() => {
-    const getUsers = async () => {
-      const response = await UserService.getAll();
-      console.log(response);
-    };
+interface profilePageProps {
+  username: string;
+}
 
-    getUsers();
-  }, []);
+const ProfilePage: React.FC<profilePageProps> = ({ username }) => {
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const response = await UserService.getAll();
+  //     console.log(response);
+  //   };
+
+  //   getUsers();
+  // }, []);
 
   return (
     <Container>
@@ -31,8 +35,8 @@ const ProfilePage: React.FC = () => {
       </Banner>
       <ProfileData>
         <EditButton outlined>Edit Profile</EditButton>
-        <h1>Leandro</h1>
-        <h2>Leandro</h2>
+        <h1>{username}</h1>
+        <h2>{username}</h2>
 
         <p>Developer</p>
         <ul>
@@ -55,7 +59,7 @@ const ProfilePage: React.FC = () => {
           </span>
         </Followage>
       </ProfileData>
-      <Feed />
+      <Feed username={username} />
     </Container>
   );
 };

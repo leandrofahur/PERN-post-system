@@ -5,15 +5,24 @@ import Post from '../Post';
 
 import { Container, Tab, Tweets, Tabs, Posts } from './styles';
 
-const Feed: React.FC = () => {
+interface feedProps {
+  username: string;
+}
+
+const Feed: React.FC<feedProps> = ({ username }) => {
   const [tab, setTab] = useState(true);
 
   return (
     <Container>
       <Tabs>
-        <Tab className={`${tab ? 'active' : ''}`} onClick={(e) => setTab(!tab)}>
-          Tweet
-        </Tab>
+        {!username ? null : (
+          <Tab
+            className={`${tab ? 'active' : ''}`}
+            onClick={(e) => setTab(!tab)}
+          >
+            Tweet
+          </Tab>
+        )}
         <Tab
           className={`${!tab ? 'active' : ''}`}
           onClick={(e) => setTab(!tab)}
@@ -22,9 +31,9 @@ const Feed: React.FC = () => {
         </Tab>
       </Tabs>
 
-      {tab ? (
+      {tab && username !== 'Guest' ? (
         <Tweets>
-          <Tweet />
+          <Tweet username={username} />
         </Tweets>
       ) : (
         <Posts>

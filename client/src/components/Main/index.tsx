@@ -14,21 +14,31 @@ import {
   EmailIcon,
 } from './styles';
 
-const Main: React.FC = () => {
+interface mainProps {
+  setAuth: (bool: boolean) => void;
+  username: string;
+}
+
+const Main: React.FC<mainProps> = ({ setAuth, username }) => {
+  const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    console.log(username);
+    setAuth(false);
+  };
+
   return (
     <Container>
       <Header>
-        <button>
+        <button onClick={onClick}>
           <BackIcon />
         </button>
 
         <ProfileInfo>
-          <strong>Leandro</strong>
+          <strong>{username}</strong>
           <span>21 Posts</span>
         </ProfileInfo>
       </Header>
 
-      <ProfilePage></ProfilePage>
+      <ProfilePage username={username} />
 
       {/* <BottomMenu>
         <HomeIcon className="active" />

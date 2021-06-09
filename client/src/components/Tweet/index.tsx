@@ -14,7 +14,11 @@ import {
 
 import TextArea from '../TextArea';
 
-const Tweet: React.FC = () => {
+interface tweetProps {
+  username: string;
+}
+
+const Tweet: React.FC<tweetProps> = ({ username }) => {
   const [content, setContent] = useState('');
 
   // const registerPost = async () => {
@@ -32,8 +36,8 @@ const Tweet: React.FC = () => {
         <Avatar />
         <Content>
           <Header>
-            <strong>Leandro</strong>
-            <span>@leandro </span>
+            <strong>{username}</strong>
+            <span>@{username} </span>
             <Dot />
             <time>{Date().substr(0, 15)}</time>
           </Header>
