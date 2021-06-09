@@ -45,11 +45,11 @@ const Login: React.FC<LoginProps> = ({ setAuth, setUsername, username }) => {
     try {
       const response = await UserService.getAll();
       const users = response.data;
-      console.log(users);
+      // console.log(users);
       const user = users.find((user: any) => {
         return user.username === username;
       });
-      console.log(user);
+      // console.log(user);
       setAuth(true);
     } catch (error) {
       console.error(error.message);

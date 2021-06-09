@@ -37,12 +37,33 @@ class PostController {
     }
   }
 
+  async find(request: Request, response: Response) {
+    try {
+      const postsRepository = getCustomRepository(PostsRepository);
+      const posts = await postsRepository.find();
+
+      if (!posts) {
+        return response.status(400).json({
+          error: "Table is not populated",
+        });
+      }
+
+      return response.status(201).json(posts);
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({
+        error: "Server error!",
+      });
+    }
+  }
+
   async findPostsById(request: Request, response: Response) {
     try {
       const { user_id } = request.params;
       const postsRepository = getCustomRepository(PostsRepository);
 
       const posts = await postsRepository.find({ user_id });
+      // const posts = await postsRepository.find({ relations: ["posts"] });
 
       return response.status(201).json(posts);
     } catch (error) {

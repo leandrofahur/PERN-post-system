@@ -36,7 +36,7 @@ const ProfilePage: React.FC<profilePageProps> = ({ username }) => {
       <ProfileData>
         <EditButton outlined>Edit Profile</EditButton>
         <h1>{username}</h1>
-        <h2>{username}</h2>
+        <h2>@{username}</h2>
 
         <p>Developer</p>
         <ul>

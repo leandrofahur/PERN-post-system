@@ -21,7 +21,7 @@ interface mainProps {
 
 const Main: React.FC<mainProps> = ({ setAuth, username }) => {
   const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    console.log(username);
+    // console.log(username);
     setAuth(false);
   };
 

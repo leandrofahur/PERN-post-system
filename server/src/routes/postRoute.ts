@@ -12,6 +12,13 @@ const postController = new PostController();
 postRoute.post("/posts/:user_id", postController.create);
 
 /*
+ * @route:  GET /posts
+ * @desc:   Fetch all posts.
+ * @access: Public
+ */
+postRoute.get("/posts", postController.find);
+
+/*
  * @route:  GET /posts/:user_id
  * @desc:   Fetch all posts from a user.
  * @access: Public

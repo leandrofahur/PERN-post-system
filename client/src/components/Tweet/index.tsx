@@ -15,21 +15,18 @@ import {
 
 import TextArea from '../TextArea';
 
-interface tweetProps {
+interface postProps {
   username: string;
 }
 
-const Tweet: React.FC<tweetProps> = ({ username }) => {
+const Tweet: React.FC<postProps> = ({ username }) => {
   const [content, setContent] = useState('');
 
   const registerPost = async () => {
     try {
       const response_id = await UserService.getId(username);
       const user_id = response_id.data;
-      const response = await PostService.create(
-        { content },
-        encodeURI(user_id)
-      );
+      const response = await PostService.create({ content }, user_id);
       console.log(response.data);
     } catch (error) {
       console.error(error.message);

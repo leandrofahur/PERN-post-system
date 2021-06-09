@@ -12,6 +12,13 @@ const commentController = new CommentController();
 commentRoute.post("/comments/:post_id", commentController.create);
 
 /*
+ * @route:  GET /comments/
+ * @desc:   Fetch all comments.
+ * @access: Public
+ */
+commentRoute.get("/comments", commentController.find);
+
+/*
  * @route:  GET /comments/:post_id
  * @desc:   Fetch all comments from a post.
  * @access: Public

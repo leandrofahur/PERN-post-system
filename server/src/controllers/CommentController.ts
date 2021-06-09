@@ -37,6 +37,26 @@ class CommentController {
     }
   }
 
+  async find(request: Request, response: Response) {
+    try {
+      const commentsRepository = getCustomRepository(CommentsRepository);
+      const comments = await commentsRepository.find();
+
+      if (!comments) {
+        return response.status(400).json({
+          error: "Table is not populated",
+        });
+      }
+
+      return response.status(201).json(comments);
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({
+        error: "Server error!",
+      });
+    }
+  }
+
   async findCommentsById(request: Request, response: Response) {
     try {
       const { post_id } = request.params;
