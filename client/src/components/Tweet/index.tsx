@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
-import postService from '../../services/PostService';
+import UserService from '../../services/UserService';
+import PostService from '../../services/PostService';
 import {
   Container,
   Body,
@@ -21,14 +22,19 @@ interface tweetProps {
 const Tweet: React.FC<tweetProps> = ({ username }) => {
   const [content, setContent] = useState('');
 
-  // const registerPost = async () => {
-  //   try {
-  //     const response = await postService.create({ content });
-  //     console.log(response);
-  //   } catch (error) {
-  //     console.error(error.message);
-  //   }
-  // };
+  const registerPost = async () => {
+    try {
+      const response_id = await UserService.getId(username);
+      const user_id = response_id.data;
+      const response = await PostService.create(
+        { content },
+        encodeURI(user_id)
+      );
+      console.log(response.data);
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   return (
     <Container>
@@ -50,7 +56,9 @@ const Tweet: React.FC<tweetProps> = ({ username }) => {
                 setContent(e.target.value);
               }}
             ></TextArea>
-            <PostButton outlined>Post</PostButton>
+            <PostButton outlined onClick={registerPost}>
+              Post
+            </PostButton>
           </TweetForm>
         </Content>
       </Body>

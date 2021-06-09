@@ -1,15 +1,15 @@
 import api from './api';
 
 class PostService {
-  create(payload: {}) {
-    return api.post('/post', payload);
+  create(payload: {}, user_id: string) {
+    return api.post(`/posts/${user_id}`, payload);
   }
   getId(username: string) {
-    return api.get(`/post/${username}`);
+    return api.get(`/posts/${username}`);
   }
 
   getAll() {
-    return api.get(`/post`);
+    return api.get(`/posts`);
   }
 }
 
