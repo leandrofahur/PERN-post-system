@@ -32,25 +32,25 @@ class UserController {
     }
   }
 
-  async find(request: Request, response: Response) {
-    try {
-      const usersRepository = getCustomRepository(UsersRepository);
-      const users = await usersRepository.find();
+  // async find(request: Request, response: Response) {
+  //   try {
+  //     const usersRepository = getCustomRepository(UsersRepository);
+  //     const users = await usersRepository.find();
 
-      if (!users) {
-        return response.status(400).json({
-          error: "Table is not populated",
-        });
-      }
+  //     if (!users) {
+  //       return response.status(400).json({
+  //         error: "Table is not populated",
+  //       });
+  //     }
 
-      return response.status(201).json(users);
-    } catch (error) {
-      console.error(error.message);
-      response.status(500).json({
-        error: "Server error!",
-      });
-    }
-  }
+  //     return response.status(201).json(users);
+  //   } catch (error) {
+  //     console.error(error.message);
+  //     response.status(500).json({
+  //       error: "Server error!",
+  //     });
+  //   }
+  // }
 
   async findByUsername(request: Request, response: Response) {
     try {
@@ -69,6 +69,22 @@ class UserController {
       }
 
       return response.status(201).json(user.id);
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({
+        error: "Server error!",
+      });
+    }
+  }
+
+  async findPostsByUser(request: Request, response: Response) {
+    try {
+      const userRepository = getCustomRepository(UsersRepository);
+      const userPosts = await userRepository.find({
+        relations: ["posts"],
+      });
+
+      return response.status(201).json(userPosts);
     } catch (error) {
       console.error(error.message);
       response.status(500).json({

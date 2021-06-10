@@ -16,7 +16,7 @@ userRoute.post("/users", userController.create);
  * @desc:   Fetch all users.
  * @access: Public
  */
-userRoute.get("/users", userController.find);
+// userRoute.get("/users", userController.find);
 
 /*
  * @route:  GET /users/:username
@@ -24,5 +24,12 @@ userRoute.get("/users", userController.find);
  * @access: Public
  */
 userRoute.get("/users/:username", userController.findByUsername);
+
+/*
+ * @route:  GET /users/user
+ * @desc:   Fetch all users and their posts.
+ * @access: Public
+ */
+userRoute.get("/users", userController.findPostsByUser);
 
 export { userRoute };

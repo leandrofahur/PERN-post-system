@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -11,7 +12,7 @@ import { v4 as uuid } from "uuid";
 import { Post } from "./Post";
 
 @Entity("comments")
-class Comments {
+class Comments extends BaseEntity {
   @PrimaryColumn()
   readonly id: string;
 
@@ -20,10 +21,9 @@ class Comments {
 
   @Column()
   post_id: string;
-
-  @ManyToOne(() => Post, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+  @ManyToOne(() => Post, (post) => post.comments)
   @JoinColumn({ name: "post_id" })
-  post: Post;
+  owner: Post;
 
   @CreateDateColumn()
   createdAt: Date;

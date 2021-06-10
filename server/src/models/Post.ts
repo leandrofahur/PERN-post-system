@@ -1,17 +1,21 @@
+import { type } from "os";
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
+  OneToMany,
   ManyToOne,
   PrimaryColumn,
+  JoinColumn,
 } from "typeorm";
 
 import { v4 as uuid } from "uuid";
 import { User } from "./User";
+import { Comments } from "./Comments";
 
 @Entity("posts")
-class Post {
+class Post extends BaseEntity {
   @PrimaryColumn()
   readonly id: string;
 
@@ -20,10 +24,15 @@ class Post {
 
   @Column()
   user_id: string;
-
-  @ManyToOne(() => User, { onDelete: "CASCADE", onUpdate: "CASCADE" })
+  @ManyToOne(() => User, (user) => user.posts, {
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE",
+  })
   @JoinColumn({ name: "user_id" })
-  user: User;
+  owner: User;
+
+  @OneToMany(() => Comments, (comments) => comments.owner)
+  comments: Comments[];
 
   @CreateDateColumn()
   createdAt: Date;

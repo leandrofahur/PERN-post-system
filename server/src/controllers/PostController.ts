@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { getCustomRepository } from "typeorm";
 import { PostsRepository } from "../repositories/PostsRepository";
+import { UsersRepository } from "../repositories/UsersRepository";
 
 class PostController {
   async create(request: Request, response: Response) {
