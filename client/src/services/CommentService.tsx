@@ -1,8 +1,8 @@
 import api from './api';
 
 class CommentService {
-  create(payload: {}, user_id: string) {
-    return api.post(`/comments/${user_id}`, payload);
+  create(payload: {}, post_id: string) {
+    return api.post(`/comments/${post_id}`, payload);
   }
   getAll() {
     return api.get(`/comments`);

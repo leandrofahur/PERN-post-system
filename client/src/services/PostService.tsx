@@ -10,6 +10,10 @@ class PostService {
   getId(user_id: string) {
     return api.get(`/posts/${user_id}`);
   }
+
+  getUserByPost() {
+    return api.get('/post');
+  }
 }
 
 export default new PostService();

@@ -26,13 +26,12 @@ interface LoginProps {
 }
 
 const Login: React.FC<LoginProps> = ({ setAuth, setUsername, username }) => {
-  const [user, setUser] = useState<
-    { id: string; username: string; email: string } | undefined
-  >();
+  const [user, setUser] = useState<string>('');
 
   const onGuestLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     try {
       setUsername('Guest');
+      toast.success('Successfully Logged in');
       setAuth(true);
     } catch (error) {
       console.error(error.message);
@@ -43,14 +42,20 @@ const Login: React.FC<LoginProps> = ({ setAuth, setUsername, username }) => {
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     try {
-      const response = await UserService.getAll();
+      const response = await UserService.getUsersPosts();
       const users = response.data;
       // console.log(users);
-      const user = users.find((user: any) => {
+      const isUser = users.find((user: any) => {
         return user.username === username;
       });
+      if (isUser) {
+        toast.success('Successfully Logged in');
+        setAuth(true);
+      } else {
+        toast.error('Invalid user');
+        setAuth(false);
+      }
       // console.log(user);
-      setAuth(true);
     } catch (error) {
       console.error(error.message);
     }
@@ -74,7 +79,14 @@ const Login: React.FC<LoginProps> = ({ setAuth, setUsername, username }) => {
           </FieldForm>
           <FieldForm>
             <EmailIcon />
-            <Input positive type="email" name="email" placeholder="email" />
+            <Input
+              positive
+              type="email"
+              name="email"
+              placeholder="email"
+              value={user}
+              onChange={(e) => setUser(user)}
+            />
           </FieldForm>
           <LoginButton outlined onClick={onUserLogin}>
             Login

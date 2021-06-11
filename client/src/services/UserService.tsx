@@ -9,7 +9,11 @@ class UserService {
     return api.get(`/users/${username}`);
   }
 
-  getAll() {
+  // getAll() {
+  //   return api.get(`/users`);
+  // }
+
+  getUsersPosts() {
     return api.get(`/users`);
   }
 }

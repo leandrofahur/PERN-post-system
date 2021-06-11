@@ -76,3 +76,40 @@ export const PostButton = styled(Button)`
   padding: 5px 12px;
   margin: 10px 0;
 `;
+
+export const PostForm = styled.div`
+  border: 1px solid var(--gray);
+  padding: 10px;
+  border-radius: 5px;
+  height: 15rem;
+`;
+
+export const PostContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--gray);
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+`;
+
+export const CommentContainer = styled.div`
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+`;
+
+export const CommentList = styled.div`
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+`;
+
+export const Comment = styled.div`
+  border: 1px solid var(--gray);
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 10px;
+`;

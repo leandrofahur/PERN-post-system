@@ -16,6 +16,10 @@ export class CreateComments1622771922502 implements MigrationInterface {
             type: "uuid",
           },
           {
+            name: "user_id",
+            type: "uuid",
+          },
+          {
             name: "content",
             type: "varchar",
           },
@@ -31,6 +35,14 @@ export class CreateComments1622771922502 implements MigrationInterface {
             referencedTableName: "posts",
             referencedColumnNames: ["id"],
             columnNames: ["post_id"],
+            onDelete: "CASCADE",
+            onUpdate: "CASCADE",
+          },
+          {
+            name: "user_id_fk",
+            referencedTableName: "users",
+            referencedColumnNames: ["id"],
+            columnNames: ["user_id"],
             onDelete: "CASCADE",
             onUpdate: "CASCADE",
           },

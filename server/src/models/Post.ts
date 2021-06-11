@@ -29,15 +29,16 @@ class Post extends BaseEntity {
     onUpdate: "CASCADE",
   })
   @JoinColumn({ name: "user_id" })
-  owner: User;
+  user: User;
 
-  @OneToMany(() => Comments, (comments) => comments.owner)
+  @OneToMany(() => Comments, (comments) => comments.post)
   comments: Comments[];
 
   @CreateDateColumn()
   createdAt: Date;
 
   constructor() {
+    super();
     if (!this.id) {
       this.id = uuid();
     }

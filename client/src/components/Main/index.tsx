@@ -14,6 +14,8 @@ import {
   EmailIcon,
 } from './styles';
 
+import { toast } from 'react-toastify';
+
 interface mainProps {
   setAuth: (bool: boolean) => void;
   username: string;
@@ -22,6 +24,7 @@ interface mainProps {
 const Main: React.FC<mainProps> = ({ setAuth, username }) => {
   const onClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     // console.log(username);
+    toast.success('Successfully Logged out');
     setAuth(false);
   };
 

@@ -41,7 +41,12 @@ class PostController {
   async find(request: Request, response: Response) {
     try {
       const postsRepository = getCustomRepository(PostsRepository);
-      const posts = await postsRepository.find();
+      const posts = await postsRepository.find({
+        relations: ["comments", "user"],
+        order: {
+          createdAt: "DESC",
+        },
+      });
 
       if (!posts) {
         return response.status(400).json({
@@ -65,6 +70,20 @@ class PostController {
 
       const posts = await postsRepository.find({ user_id });
       // const posts = await postsRepository.find({ relations: ["posts"] });
+
+      return response.status(201).json(posts);
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({
+        error: "Server error!",
+      });
+    }
+  }
+
+  async findUserByPost(request: Request, response: Response) {
+    try {
+      const postsRepository = getCustomRepository(PostsRepository);
+      const posts = await postsRepository.find({ relations: ["owner"] });
 
       return response.status(201).json(posts);
     } catch (error) {

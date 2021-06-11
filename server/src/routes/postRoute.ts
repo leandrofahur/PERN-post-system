@@ -25,4 +25,11 @@ postRoute.get("/posts", postController.find);
  */
 postRoute.get("/posts/:user_id", postController.findPostsById);
 
+/*
+ * @route:  GET /posts/:user_id
+ * @desc:   Fetch all posts from a user.
+ * @access: Public
+ */
+postRoute.get("/post", postController.findUserByPost);
+
 export { postRoute };

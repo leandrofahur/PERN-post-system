@@ -13,6 +13,8 @@ import {
   TweetForm,
 } from './styles';
 
+import { toast } from 'react-toastify';
+
 import TextArea from '../TextArea';
 
 interface postProps {
@@ -27,7 +29,10 @@ const Tweet: React.FC<postProps> = ({ username }) => {
       const response_id = await UserService.getId(username);
       const user_id = response_id.data;
       const response = await PostService.create({ content }, user_id);
-      console.log(response.data);
+      setContent('');
+      toast.success('Posted Successfully');
+      // console.log(response.data);
+      // window.location.host = '/dashboard';
     } catch (error) {
       console.error(error.message);
     }

@@ -6,8 +6,14 @@ class CommentController {
   async create(request: Request, response: Response) {
     try {
       const { post_id } = request.params;
-      const { content } = request.body;
+      const { content, user_id } = request.body;
       const commentsRepository = getCustomRepository(CommentsRepository);
+
+      console.log({
+        post_id,
+        content,
+        user_id,
+      });
 
       if (!content) {
         return response.status(400).json({
@@ -24,6 +30,7 @@ class CommentController {
       const comment = commentsRepository.create({
         post_id,
         content,
+        user_id,
       });
 
       await commentsRepository.save(comment);
@@ -65,6 +72,20 @@ class CommentController {
       const comments = await commentsRepository.find({
         post_id,
       });
+
+      return response.status(201).json(comments);
+    } catch (error) {
+      console.error(error.message);
+      response.status(500).json({
+        error: "Server error!",
+      });
+    }
+  }
+
+  async findPostByComment(request: Request, response: Response) {
+    try {
+      const commentsRepository = getCustomRepository(CommentsRepository);
+      const comments = await commentsRepository.find({ relations: ["owner"] });
 
       return response.status(201).json(comments);
     } catch (error) {

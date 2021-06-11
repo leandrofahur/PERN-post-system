@@ -25,4 +25,11 @@ commentRoute.get("/comments", commentController.find);
  */
 commentRoute.get("/comments/:post_id", commentController.findCommentsById);
 
+/*
+ * @route:  GET /posts/:user_id
+ * @desc:   Fetch all posts from a user.
+ * @access: Public
+ */
+commentRoute.get("/comment", commentController.findPostByComment);
+
 export { commentRoute };

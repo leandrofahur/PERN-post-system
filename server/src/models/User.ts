@@ -8,6 +8,7 @@ import {
 } from "typeorm";
 
 import { v4 as uuid } from "uuid";
+import { Comments } from "./Comments";
 import { Post } from "./Post";
 
 @Entity("users")
@@ -24,13 +25,17 @@ class User extends BaseEntity {
   @CreateDateColumn()
   createdAt: Date;
 
-  @OneToMany(() => Post, (post) => post.owner, {
+  @OneToMany(() => Comments, (comments) => comments.user)
+  comments: Comments[];
+
+  @OneToMany(() => Post, (post) => post.user, {
     onDelete: "CASCADE",
     onUpdate: "CASCADE",
   })
   posts: Post[];
 
   constructor() {
+    super();
     if (!this.id) {
       this.id = uuid();
     }

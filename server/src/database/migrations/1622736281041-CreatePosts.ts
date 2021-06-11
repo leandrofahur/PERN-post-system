@@ -16,6 +16,11 @@ export class CreatePosts1622736281041 implements MigrationInterface {
             type: "uuid",
           },
           {
+            name: "comment_id",
+            type: "uuid",
+            isNullable: true,
+          },
+          {
             name: "content",
             type: "varchar",
           },
